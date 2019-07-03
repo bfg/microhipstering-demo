@@ -1,0 +1,36 @@
+#
+# .gitignore
+#
+
+# gradle
+build/*
+**/build/*
+.gradle
+
+# temp folders
+tmp/*
+**/tmp/*
+*.log
+
+# idea
+*.iml
+.idea/*
+**/.idea/*
+
+# eclipse
+.project
+**/.project
+.settings/*
+**/.settings/*
+
+# osx crap
+.DS_Store*
+
+# generated documentation
+**/src/main/docs/*/generated
+
+out/
+tmp/
+./local/
+
+# EOF

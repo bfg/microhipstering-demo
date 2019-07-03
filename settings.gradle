@@ -1,0 +1,10 @@
+//
+// build.gradle
+//
+
+rootProject.name = "microhipstering-demo"
+
+include 'business-logic-lib'
+
+// vim:shiftwidth=2 softtabstop=2 expandtab
+// EOF
