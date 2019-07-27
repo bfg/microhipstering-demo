@@ -4,15 +4,53 @@
 
 plugins {
   id "org.jetbrains.kotlin.jvm"
+  id "org.jetbrains.kotlin.kapt"
+  id "org.jetbrains.kotlin.plugin.allopen"
+
+  id "me.champeau.gradle.jmh"               version "0.4.8"
+  id "io.morethan.jmhreport"                version "0.9.0"
+
+  id "com.github.johnrengelman.shadow"
 }
 
 dependencies {
-    implementation          "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  kapt                    "io.micronaut:micronaut-inject-java"
+  kapt                    "io.micronaut:micronaut-validation"
+  kaptTest                "io.micronaut:micronaut-inject-java"
 
-    implementation          "io.github.microutils:kotlin-logging"
-    implementation          "io.reactivex.rxjava2:rxjava"
+  implementation          "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+  // micronaut
+  compileOnly             "io.micronaut:micronaut-http-client"
+
+  implementation          "io.github.microutils:kotlin-logging"
+  implementation          "io.reactivex.rxjava2:rxjava"
+
+  // JMH benchmarks
+  jmhImplementation       "org.openjdk.jmh:jmh-core:${jmhVersion}"
+  jmhImplementation       "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+  jmhImplementation       "ch.qos.logback:logback-classic"
 }
 
+allOpen {
+  annotation("io.micronaut.aop.Around")
+}
+
+jmhJar {
+  baseName = project.name + '-benchmarks'
+  classifier = version = null
+}
+
+jmh {
+  duplicateClassesStrategy  = "warn"
+  includeTests              = false
+}
+
+jmhReport {
+  def dir = "build/reports/jmh"
+  jmhResultPath   = project.file("$dir/jmh-result.json")
+  jmhReportOutput = project.file("$dir")
+}
 
 // vim:shiftwidth=2 softtabstop=2 expandtab
 // EOF
