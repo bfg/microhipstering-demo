@@ -1,4 +1,4 @@
-package com.github.bfg.microhipstering.bizlogic
+package mh.bizlogic
 
 import io.reactivex.Maybe
 

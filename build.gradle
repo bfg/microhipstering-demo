@@ -66,7 +66,7 @@ allprojects {
     dependencies {
       dependency  "org.projectlombok:lombok:${lombokVersion}"
       dependency  "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-      dependency  "ch.qos.logback:logback-classic:1.2.3"
+      dependency  "ch.qos.logback:logback-classic:1.1.4" // 1.2.3 doesn't play well with native-image :-/
       dependency  "io.github.microutils:kotlin-logging:1.7.2"
 
       dependencySet(group: "org.slf4j", version: "${slf4jVersion}") {

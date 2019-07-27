@@ -1,4 +1,4 @@
-package com.github.bfg.microhipstering.bizlogic;
+package mh.bizlogic;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

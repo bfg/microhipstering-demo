@@ -1,4 +1,4 @@
-package com.github.bfg.microhipstering.bizlogic
+package mh.bizlogic
 
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.client.annotation.Client

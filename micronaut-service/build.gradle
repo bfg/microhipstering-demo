@@ -1,0 +1,102 @@
+//
+// build.gradle
+//
+
+plugins {
+  id "application"
+  id "com.github.johnrengelman.shadow"
+
+  id "org.jetbrains.kotlin.jvm"
+  id "org.jetbrains.kotlin.kapt"
+  id "org.jetbrains.kotlin.plugin.allopen"
+
+  // docker support
+  id "com.palantir.git-version"             version "0.12.0-rc2"
+  id "com.palantir.docker"                  version "0.22.1"
+}
+
+configurations {
+    all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                // force netty version in transitive dependencies
+                if (details.requested.group == "io.netty" && !details.requested.name.contains("tcnative"))
+                    details.useVersion(nettyVersion)
+            }
+        }
+    }
+}
+
+
+dependencies {
+  // micronaut: annotation processors
+  annotationProcessor     "io.micronaut:micronaut-inject-java"
+  kapt     "io.micronaut:micronaut-inject-java"
+  kapt     "io.micronaut:micronaut-validation"
+  kapt     "io.micronaut.configuration:micronaut-openapi"
+
+  kaptTest     "io.micronaut:micronaut-inject-java"
+  kaptTest     "io.micronaut:micronaut-validation"
+  kaptTest     "io.micronaut.configuration:micronaut-openapi"
+
+  // kotlin
+  implementation          "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  implementation          "org.jetbrains.kotlin:kotlin-reflect"
+
+  // BEGIN: micronaut
+  implementation          "io.micronaut:micronaut-inject"
+  implementation          "io.micronaut:micronaut-validation"
+  implementation          "io.micronaut:micronaut-http-server-netty"
+  implementation          "io.micronaut.configuration:micronaut-micrometer-core"
+  implementation          "io.micronaut:micronaut-management"
+
+  compileOnly             "io.micronaut:micronaut-inject-java"
+
+  // graal native-image stuff
+  compileOnly             "com.oracle.substratevm:svm"
+  kapt                    "io.micronaut:micronaut-graal"
+  annotationProcessor     "io.micronaut:micronaut-graal"
+  // END:   micronaut
+
+  // jackson
+  implementation          "com.fasterxml.jackson.module:jackson-module-kotlin"
+  implementation          "com.fasterxml.jackson.module:jackson-module-afterburner"
+
+  // swagger/openapi doc
+  implementation          "io.swagger.core.v3:swagger-annotations"
+  implementation          "org.webjars:swagger-ui:3.19.5"
+
+  // logging
+  implementation          "ch.qos.logback:logback-classic"
+  runtime                 "org.slf4j:jcl-over-slf4j"
+  implementation          "io.github.microutils:kotlin-logging"
+
+  // subprojects
+  implementation          project(":bizlogic-lib")
+
+  // tests
+  testImplementation      "io.micronaut:micronaut-inject-groovy"
+  testImplementation      "io.micronaut.test:micronaut-test-spock:${micronautTestVersion}"
+  testImplementation      "io.micronaut.test:micronaut-test-junit5:${micronautTestVersion}"
+}
+
+mainClassName = "mh.service.micronaut.AppStarter"
+shadowJar {
+  mergeServiceFiles()
+}
+
+run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
+
+// disable creation of distribution archives
+distZip.enabled = distTar.enabled = shadowDistTar.enabled = shadowDistZip.enabled = false
+
+// docker stuff
+docker {
+  name        "gracnar/microhipstering-demo:${version}"
+  dockerfile  file("Dockerfile")
+  files       "build/libs/${project.name}-${version}-all.jar"
+  buildArgs   "serviceJar": "${project.name}-${version}-all.jar"
+}
+
+// vim:shiftwidth=2 softtabstop=2 expandtab
+// EOF

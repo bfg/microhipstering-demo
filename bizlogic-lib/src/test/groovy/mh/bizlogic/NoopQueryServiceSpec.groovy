@@ -1,4 +1,4 @@
-package com.github.bfg.microhipstering.bizlogic
+package mh.bizlogic
 
 import groovy.util.logging.Slf4j
 import spock.lang.Specification

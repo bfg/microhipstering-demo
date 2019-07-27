@@ -1,4 +1,4 @@
-package com.github.bfg.microhipstering.bizlogic;
+package mh.bizlogic;
 
 /**
  * [QueryService] query result.
