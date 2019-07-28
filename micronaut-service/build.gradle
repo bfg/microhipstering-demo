@@ -106,8 +106,10 @@ distZip.enabled = distTar.enabled = shadowDistTar.enabled = shadowDistZip.enable
 docker {
   name        "gracnar/microhipstering-demo:${version}"
   dockerfile  file("Dockerfile")
-  files       "build/libs/${project.name}-${version}-all.jar"
-  buildArgs   "serviceJar": "${project.name}-${version}-all.jar"
+  files       "build/libs/${project.name}-${version}-all.jar",
+              "scripts/java-app-starter"
+
+  buildArgs   "appJar": "${project.name}-${version}-all.jar"
 }
 
 // vim:shiftwidth=2 softtabstop=2 expandtab

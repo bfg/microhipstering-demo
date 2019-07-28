@@ -12,9 +12,14 @@ import mh.service.micronaut.RejectCurlRequests
 open class FooController {
     private val result = QueryResult("foo: čćžšđ ČĆŽŠĐ", listOf("bar", "baz"))
 
-    @Timed("foo.bar")
     @Get("/bar")
     open fun get(): Maybe<QueryResult> {
+        return Maybe.just(result)
+    }
+
+    @Timed("foo.timed")
+    @Get("/timed")
+    open fun getTimed(): Maybe<QueryResult> {
         return Maybe.just(result)
     }
 

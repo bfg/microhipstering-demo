@@ -13,6 +13,12 @@ presentation
 ./gradlew clean build
 ```
 
+If you also want to build docker image:
+
+```
+./gradlew micronaut-service:docker
+```
+
 # Running
 
 ## development server
