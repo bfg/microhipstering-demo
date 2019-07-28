@@ -28,6 +28,8 @@
 
   <!-- per-test-class defined logger -->
   <!--logger name="com.something.else" level="DEBUG" /-->
+  <!--logger name="io.micronaut.http.server" level="DEBUG" /-->
+  <!--logger name="io.netty" level="DEBUG" /-->
 
   <!--logger name="org.apache" level="TRACE" additivity="false">
     <appender-ref ref="wireDebug"/>

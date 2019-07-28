@@ -1,0 +1,32 @@
+#
+# micronaut application config
+#
+
+micronaut:
+  application:
+    name: microhipstering-demo
+
+  heartbeat:
+    enabled:    true
+    interval:   PT5S
+
+  io:
+    watch:
+      paths:    src/main
+      restart:  true
+
+  executors:
+    io:
+      type:                   scheduled
+      core-pool-size:         1
+      n-threads:              50
+
+  server:
+    netty:
+      validate-headers:       false
+      use-native-transport:   true
+      compression-threshold:  512
+      log-level: debug
+
+# vim:shiftwidth=2 softtabstop=2 expandtab
+# EOF

@@ -1,0 +1,65 @@
+#!/bin/sh
+
+printhelp() {
+  cat <<EOF
+USAGE: $0 <def|g1|shenandoah|shenandoahc|pgc|cms|zgc|serial> <jar> [args]
+This script runs java service with one of possible GCs.
+
+Arguments:
+  * selected GC
+  * jar file
+  * optional jar file arguments
+EOF
+}
+
+####################################################
+
+gc_type="$1"
+jar_file="$2"
+test -f "$jar_file" || {
+  echo "Invalid arguments."
+  echo ""
+  printhelp
+  exit 1
+}
+
+
+shift 2
+java_version=$(java -version 2>&1 | head -n1 | awk '{print $3}' | tr -d '"' | cut -d. -f1)
+
+JAVA_TOOL_OPTIONS="-XX:+UnlockExperimentalVMOptions -Xmx256M"
+if [ $java_version -ge 9 ]; then
+  JAVA_TOOL_OPTIONS="--illegal-access=warn $JAVA_TOOL_OPTIONS"
+fi
+export JAVA_TOOL_OPTIONS
+
+# SELECT GC: https://docs.oracle.com/en/java/javase/12/gctuning/available-collectors.html
+case $gc_type in
+  def|g1)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseG1GC"
+    ;;
+  shenandoahc)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact"
+    ;;
+  shenandoah)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseShenandoahGC"
+    ;;
+  pgc)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseParallelGC"
+    ;;
+  cms)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseConcMarkSweepGC"
+    ;;
+  zgc)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseZGC"
+    ;;
+  serial)
+    JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -XX:+UseSerialGC"
+    ;;
+esac
+
+# time to start application
+exec java -jar "$jar_file" "$@"
+
+# vim:shiftwidth=2 softtabstop=2 expandtab
+# EOF

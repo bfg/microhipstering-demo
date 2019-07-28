@@ -58,6 +58,18 @@ dependencies {
   annotationProcessor     "io.micronaut:micronaut-graal"
   // END:   micronaut
 
+
+  // BEGIN: netty
+  // native, JNI based epoll edge triggered transport
+  //implementation          "io.netty:netty-transport-native-epoll"
+  implementation          "io.netty:netty-transport-native-epoll:${nettyVersion}:linux-x86_64"
+
+  // native, JNI-based boringssl TLS transport
+  implementation          "io.netty:netty-tcnative-boringssl-static:2.0.25.Final:linux-x86_64"
+  // END:   netty
+
+  // netty TLS openssl based JNI transport
+
   // jackson
   implementation          "com.fasterxml.jackson.module:jackson-module-kotlin"
   implementation          "com.fasterxml.jackson.module:jackson-module-afterburner"

@@ -8,13 +8,16 @@ import io.micronaut.context.annotation.Bean
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Primary
 import io.micronaut.context.annotation.Replaces
-import mu.KotlinLogging
+import org.slf4j.LoggerFactory
 import javax.inject.Singleton
-
-private val log = KotlinLogging.logger {}
 
 @Factory
 class BeanFactory {
+    private val log = LoggerFactory.getLogger(javaClass)
+
+    /**
+     * Creates custom, supercharged jackson objectmapper :-)
+     */
     @Bean
     @Primary
     @Singleton
