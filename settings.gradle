@@ -6,6 +6,7 @@ rootProject.name = "microhipstering-demo"
 
 include 'bizlogic-lib'
 include 'micronaut-service'
+include 'spring-boot-service'
 
 // vim:shiftwidth=2 softtabstop=2 expandtab
 // EOF

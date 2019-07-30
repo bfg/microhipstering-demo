@@ -54,3 +54,9 @@ ab -n500000 -k -c100 http://localhost:8080/foo/bar
 See [Oracle available GC document for details](https://docs.oracle.com/en/java/javase/12/gctuning/available-collectors.html).
 
 
+NOTE: comparison with dummy [spring-boot](spring-boot-service/) with netty based server:
+
+| GC | peak rps | rss mem |
+|----|----------|---------|
+| serial               | 17820 | 398M |
+
