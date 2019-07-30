@@ -3,6 +3,7 @@ package mh.service.micronaut.controller
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Post
+import io.micronaut.validation.Validated
 import io.reactivex.Maybe
 import mh.bizlogic.Query
 import mh.bizlogic.QueryResult
@@ -13,11 +14,12 @@ import javax.inject.Singleton
 import javax.validation.Valid
 
 @Singleton
+@Validated
 @Controller("/v1/")
 open class QueryController
 @Inject
 constructor(private val queryService: RemoteQueryService) {
-    protected val log = LoggerFactory.getLogger(javaClass)
+    protected open val log = LoggerFactory.getLogger(javaClass)
 
     @Post("/query")
     open fun query(@Valid @Body q: Query): Maybe<QueryResult> {

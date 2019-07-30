@@ -10,6 +10,8 @@ plugins {
   id "org.jetbrains.kotlin.kapt"
   id "org.jetbrains.kotlin.plugin.allopen"
 
+  id "com.gorylenko.gradle-git-properties"
+
   // docker support
   id "com.palantir.git-version"             version "0.12.0-rc2"
   id "com.palantir.docker"                  version "0.22.1"

@@ -10,14 +10,14 @@ import javax.validation.constraints.*
 @Schema(description = "Query DTO")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class Query(
-        @NotNull
-        @NotBlank
-        @NotEmpty
+        @field:NotNull
+        @field:NotBlank
+        @field:NotEmpty
         @Schema(description = "Search for given text")
         val text: String,
 
-        @Min(1)
-        @Max(100)
+        @field:Min(1)
+        @field:Max(100)
         @Schema(description = "Specifies maximum number of returned results")
         val maxResults: Int = 10
 ) {}

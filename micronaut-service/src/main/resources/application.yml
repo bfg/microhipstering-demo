@@ -23,6 +23,31 @@ micronaut:
       compression-threshold:  512
       log-level: debug
 
+  router:
+    static-resources:
+      swagger:
+        paths:    "classpath:META-INF/swagger"
+        mapping:  "/api-doc/**"
+
+      swagger-ui:
+        paths:    "classpath:META-INF/resources/webjars/swagger-ui/3.19.5"
+        mapping:  "/swagger-ui/**"
+
+# production ready endpoints
+endpoints:
+  all:
+    enabled:    true
+    sensitive:  false
+  info:
+    config.enabled: true
+    git.enabled:    true
+    build-info.properties: true
+  health:
+    enabled:    true
+    sensitive:  false
+    details-visible: ANONYMOUS
+    url.enabled:  true
+
 # biz-logic stuff
 services:
   query:
