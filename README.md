@@ -51,7 +51,7 @@ ab -n500000 -k -c100 http://localhost:8080/foo/bar
 | shenandoah           | 63114 | 504M |
 | zgc                  | 46986 | 840M |
 
-See [Oracle available GC document for details](https://docs.oracle.com/en/java/javase/12/gctuning/available-collectors.html).
+See [Oracle available GCs document for details](https://docs.oracle.com/en/java/javase/12/gctuning/available-collectors.html).
 
 
 NOTE: comparison with dummy [spring-boot](spring-boot-service/) with netty based server:
