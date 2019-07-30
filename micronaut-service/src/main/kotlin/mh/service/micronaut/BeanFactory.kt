@@ -8,6 +8,9 @@ import io.micronaut.context.annotation.Bean
 import io.micronaut.context.annotation.Factory
 import io.micronaut.context.annotation.Primary
 import io.micronaut.context.annotation.Replaces
+import mh.bizlogic.NonBlockingQueryService
+import mh.bizlogic.QueryService
+import mh.bizlogic.ServiceSettings
 import org.slf4j.LoggerFactory
 import javax.inject.Singleton
 
@@ -39,5 +42,11 @@ class BeanFactory {
         val result = m.findAndRegisterModules()
         log.info("created custom jackson object mapper: {}", result)
         return result
+    }
+
+    @Bean
+    @Singleton
+    fun backendQueryService(settings: ServiceSettings): QueryService {
+        return NonBlockingQueryService(settings)
     }
 }

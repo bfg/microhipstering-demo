@@ -63,13 +63,15 @@ constructor(
                 dst["$name.mean"] = toNiceDouble(timer.mean(unit))
                 dst["$name.max"] = toNiceDouble(timer.max(unit))
             }
+            else -> {
+            }
         }
 
         // take a snapshot for meters that supports histograms
         if (meter is HistogramSupport) {
             val snapshot = meter.takeSnapshot()
             snapshot.percentileValues().forEach {
-                val percentileStr = String.format("pct-%d", (it.percentile() * 100) as Int)
+                val percentileStr = String.format("pct-%d", ((it.percentile() * 100) as Int))
                 dst["$name.$percentileStr"] = toNiceDouble(it.value(unit))
             }
         }

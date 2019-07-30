@@ -23,7 +23,7 @@ public class NoopQueryServiceBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @Threads(1)
     public QueryResult dummyBenchmarkST() {
-        return service.getFor("dummy", 42)
+        return service.query("dummy", 42)
                 .blockingGet();
     }
 
@@ -31,7 +31,7 @@ public class NoopQueryServiceBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @Threads(Threads.MAX)
     public QueryResult dummyBenchmarkMT() {
-        return service.getFor("dummy", 42)
+        return service.query("dummy", 42)
                 .blockingGet();
     }
 }

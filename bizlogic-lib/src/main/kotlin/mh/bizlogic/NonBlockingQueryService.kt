@@ -1,16 +1,13 @@
 package mh.bizlogic
 
 import io.reactivex.Maybe
-import java.util.concurrent.TimeUnit
 
-class NonBlockingQueryService(delayUnit: TimeUnit,
-                              minDelay: Long,
-                              maxDelay: Long) : AbstractQueryService(delayUnit, minDelay, maxDelay) {
+class NonBlockingQueryService(settings: ServiceSettings) : AbstractQueryService(settings) {
+
     private val item = QueryResult("foo", listOf("a", "b", "c"))
 
-    override fun getFor(name: String, maxResults: Int): Maybe<QueryResult> {
-        val delay = randomDelay()
-        return Maybe.timer(delay, delayUnit)
-                .map { item }
+    override fun query(q: Query): Maybe<QueryResult> {
+        return findResult(q)
+                .delay(randomDelay(), settings.delayUnit)
     }
 }

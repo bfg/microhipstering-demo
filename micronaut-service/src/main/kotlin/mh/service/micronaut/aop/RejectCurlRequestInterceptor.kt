@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory
 import javax.inject.Singleton
 
 @Singleton
-class RejectCurlRequestInterceptor : MethodInterceptor<Object, Object> {
+class RejectCurlRequestInterceptor : MethodInterceptor<Any, Any> {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun intercept(ctx: MethodInvocationContext<Object, Object>): Object {
+    override fun intercept(ctx: MethodInvocationContext<Any, Any>): Any {
         val requestWasMadeByCurl = ctx.parameters.asSequence()
                 .map { it.value }
                 .filter { it.value != null }

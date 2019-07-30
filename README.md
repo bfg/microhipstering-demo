@@ -24,7 +24,7 @@ If you also want to build docker image:
 ## development server
 
 ```
-./gradlew  micronaut-service:run -q --continuous
+MICRONAUT_ENVIRONMENTS=dev ./gradlew  micronaut-service:run -qt
 ```
 
 ## built artifact

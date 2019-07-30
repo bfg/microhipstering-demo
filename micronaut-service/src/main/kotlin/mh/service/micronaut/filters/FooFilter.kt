@@ -8,10 +8,8 @@ import io.micronaut.http.filter.HttpServerFilter
 import io.micronaut.http.filter.ServerFilterChain
 import io.reactivex.Flowable
 import org.reactivestreams.Publisher
-import javax.inject.Singleton
 
-@Singleton
-@Filter("/**")
+@Filter("/foo/filtered/**")
 class FooFilter : HttpServerFilter, Ordered {
     private val toString = javaClass.simpleName
 

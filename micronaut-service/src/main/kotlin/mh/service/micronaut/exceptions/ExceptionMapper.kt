@@ -22,7 +22,7 @@ class ExceptionMapper : ExceptionHandler<Throwable, HttpResponse<Any>> {
     override fun handle(request: HttpRequest<*>, exception: Throwable): HttpResponse<Any> {
         val status = getStatus(exception)
         val error = exception.message ?: "Unknown error"
-        val body = mapOf("status" to status, "error" to error)
+        val body = mapOf("status" to status, "message" to error)
 
         if (status.getCode() < 500) {
             log.warn("[{}] {} {} error: {} {}",

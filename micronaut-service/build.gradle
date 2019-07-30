@@ -47,8 +47,10 @@ dependencies {
   implementation          "io.micronaut:micronaut-inject"
   implementation          "io.micronaut:micronaut-validation"
   implementation          "io.micronaut:micronaut-http-server-netty"
+  implementation          "io.micronaut:micronaut-http-client"
   implementation          "io.micronaut.configuration:micronaut-micrometer-core"
   implementation          "io.micronaut:micronaut-management"
+  implementation          "io.micronaut.configuration:micronaut-hibernate-validator"
 
   compileOnly             "io.micronaut:micronaut-inject-java"
 
@@ -90,6 +92,10 @@ dependencies {
   testImplementation      "io.micronaut:micronaut-inject-groovy"
   testImplementation      "io.micronaut.test:micronaut-test-spock:${micronautTestVersion}"
   testImplementation      "io.micronaut.test:micronaut-test-junit5:${micronautTestVersion}"
+}
+
+test {
+  failFast = false
 }
 
 mainClassName = "mh.service.micronaut.AppStarter"

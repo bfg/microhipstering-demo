@@ -4,22 +4,22 @@ import groovy.util.logging.Slf4j
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import java.util.concurrent.TimeUnit
-
 @Slf4j
 @Unroll
 class BlockingQueryServiceSpec extends Specification {
-    def service = new BlockingQueryService(TimeUnit.MICROSECONDS, 200, 100_000)
+    static def settings = new ServiceSettings(minDelay: 1, maxDelay: 2)
+    static def service = new BlockingQueryService(settings)
 
-    def "should always return result for #name, #numResults"() {
+    def "should always return result for #text, #numResults"() {
         when:
-        def result = service.getFor(name, numResults).blockingGet()
+        def result = service.query(text, numResults).blockingGet()
         log.info("got: {}", result)
 
         then:
-        result != null
+        result.text == text
+        result.results.size() >= 4 && result.results.size() <= 5
 
         where:
-        [name, numResults] << [["foo", "bar", "baz"], [0, 100, 1000]].combinations()
+        [text, numResults] << [["knee", "stress"], [100, 1000]].combinations()
     }
 }

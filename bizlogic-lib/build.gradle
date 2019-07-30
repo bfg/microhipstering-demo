@@ -22,6 +22,7 @@ dependencies {
 
   // micronaut
   compileOnly             "io.micronaut:micronaut-http-client"
+  compileOnly             "io.swagger.core.v3:swagger-annotations"
 
   implementation          "io.github.microutils:kotlin-logging"
   implementation          "io.reactivex.rxjava2:rxjava"

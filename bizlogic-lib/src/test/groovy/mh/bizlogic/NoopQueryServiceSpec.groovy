@@ -11,7 +11,7 @@ class NoopQueryServiceSpec extends Specification {
 
     def "should not return any result for: #name, #numResults"() {
         expect:
-        service.getFor(name, numResults).blockingGet() == null
+        service.query(name, numResults).blockingGet() == null
 
         where:
         [name, numResults] << [["foo", "bar", "baz"], [0, 100, 1000]].combinations()

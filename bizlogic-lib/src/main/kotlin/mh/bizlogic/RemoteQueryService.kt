@@ -1,14 +1,15 @@
 package mh.bizlogic
 
-import io.micronaut.http.annotation.Get
+import io.micronaut.http.annotation.Body
+import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.annotation.Client
 import io.reactivex.Maybe
 
 /**
  * QueryService that fetches results via HTTP rest interface
  */
-@Client("/internal/remote-query-service")
+@Client("/backend/v1")
 interface RemoteQueryService : QueryService {
-    @Get("/")
-    override fun getFor(name: String, maxResults: Int): Maybe<QueryResult>
+    @Post("/query")
+    override fun query(@Body q: Query): Maybe<QueryResult>
 }

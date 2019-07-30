@@ -1,0 +1,12 @@
+#
+# micronaut application config
+#
+
+micronaut:
+  io:
+    watch:
+      paths:    src/main
+      restart:  true
+
+# vim:shiftwidth=2 softtabstop=2 expandtab
+# EOF

@@ -10,11 +10,6 @@ micronaut:
     enabled:    true
     interval:   PT5S
 
-  io:
-    watch:
-      paths:    src/main
-      restart:  true
-
   executors:
     io:
       type:                   scheduled
@@ -27,6 +22,12 @@ micronaut:
       use-native-transport:   true
       compression-threshold:  512
       log-level: debug
+
+# biz-logic stuff
+services:
+  query:
+    min-delay: 5
+    max-delay: 23
 
 # vim:shiftwidth=2 softtabstop=2 expandtab
 # EOF

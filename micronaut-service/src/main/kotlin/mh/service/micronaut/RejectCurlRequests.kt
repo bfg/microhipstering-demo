@@ -3,7 +3,6 @@ package mh.service.micronaut
 import io.micronaut.aop.Around
 import io.micronaut.context.annotation.Type
 import mh.service.micronaut.aop.RejectCurlRequestInterceptor
-import java.lang.annotation.Documented
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.annotation.AnnotationTarget.FUNCTION
 
@@ -13,7 +12,7 @@ import kotlin.annotation.AnnotationTarget.FUNCTION
  *
  * @see [RejectCurlRequestInterceptor]
  */
-@Documented
+@MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(CLASS, FUNCTION)
 @Around
