@@ -1,7 +1,7 @@
 # Microhipstering demo
 
-This repository contains code supporting [Microhipstering with Micronaut](https://slides.com/gracnar/vert-x/)
-presentation
+This repository contains code supporting [Microhipstering with Micronaut](https://slides.com/gracnar/microhipstering-with-micronaut/)
+presentation.
 
 # Building
 
